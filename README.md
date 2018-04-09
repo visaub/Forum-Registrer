@@ -1,5 +1,5 @@
 # Forum Registrer
-git clone https://github.com/visaub/Forum-Registrer && cd web/data
+git clone https://github.com/visaub/Forum-Registrer/web && cd web 
 
 Upload three documents with these names:
 - Cens.csv
