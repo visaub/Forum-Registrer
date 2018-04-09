@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script type="text/javascript" src="/static/llqrcode.js"></script>
+<script type="text/javascript" src="/static/webqr.js"></script>
+<title>OMG QR!</title>
+{% endblock %}
+
+{% block body %}
+<div class="content container">
+
+    <div class="row margin-top">
+        <div class="col-md-10 col-md-offset-1">
+            <div style="text-align: center;">
+                {% if m=='1' %}
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <b>Try again</b>, maybe the link was not valid
+                    </div>
+                </div>
+                {% endif %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="text-center">QR Reader</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="outdiv">
+                        </div>
+                        <canvas style="display: none" id="qr-canvas" width="800" height="600"></canvas>
+
+                        <script type="text/javascript">load();</script>
+                        <div id="error"></div>
+
+                    </div>
+                    <div class="panel-footer">
+                        <a class="btn btn-info btn-block" href="/check-in">Enter Name</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
