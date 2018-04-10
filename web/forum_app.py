@@ -9,6 +9,8 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, curren
 from functools import wraps
 from bs4 import BeautifulSoup as soup
 
+from config import margin, time_change
+
 def get_info(url):
     r=requests.get(url)
     page_html=r.text
@@ -36,9 +38,6 @@ def get_info(url):
 
 app = Flask(__name__)
 data_path=os.path.abspath('data')
-margin=900          #seconds of margin before start and after end of activity
-time_change=3600    #difference on time between server and user, typically 1h,
-                    #as Spain is on GMT+1
 
 ### Login ###
 
@@ -662,7 +661,7 @@ def thank_you():
     return render_template('thank_you.html',title='About')
 
 
-@app.route('/reset')     #development porpouse
+#@app.route('/reset')     #development porpouse
 def reset():
     f=open(data_path+'/log.txt','w');
     f.write('');f.close()
@@ -672,8 +671,8 @@ def reset():
     initDB_colabs()
     initDB_alums()
     initDB_acts()
-    print('Success:, All variables were reset')
-    return render_template('text.html',title='Success',message='All variables were reset')
+    print('Success. All variables were reset')
+    return render_template('text.html',title='Success', message='All variables were reset')
 
 
 @app.route('/all/<kind>')   #to get activitites and volunteers
