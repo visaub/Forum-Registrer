@@ -1,8 +1,8 @@
 # Forum Registrer
 
-App that can be used for check in on big events and track of admissions. It includes a QR scanner. Credit most be given to <a href="https://github.com/HackAssistant/registration">HackAssistant</a> and <a href="https://github.com/jandrikus">Jandrikus</a>.
+App that can be used for the check in of attendances on big events with many activities. It includes a QR scanner. Credit most be given to <a href="https://github.com/HackAssistant/registration">HackAssistant</a> and <a href="https://github.com/jandrikus">Jandrikus</a>.
 
-For deploying this web-app it is highly recommended to use <a href='https://www.pythonanywhere.com'> pythonanywhere </a>, because it the easiest platform to use.
+For deploying this web-app it is highly recommended to use <a href='https://www.pythonanywhere.com'> pythonanywhere</a>, because it the easiest platform to use.
 
 <h3> Starting </h3>
 
@@ -33,7 +33,7 @@ After this step it is not possible to add new People, Activities or Volunteers t
 
 <h3>And you are ready to go!</h3>
 
-Note: to use camera to scan the QR code of the UPC ID the server must be able to access https://identitatdigital.upc.edu. On pythonanywhere that is only possible with an upgraded account, prizes start at 5 $/month.
+Note: to use camera to scan the QR code of the UPC ID the server must be able to access https://identitatdigital.upc.edu. On pythonanywhere that is only possible with an upgraded account, with prices starting at 5 $/month.
 
 It is recommended to read the user guide (now in Spanish). 
 
