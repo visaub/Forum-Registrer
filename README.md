@@ -8,6 +8,7 @@ For deploying this web-app it is highly recommended to use <a href='https://www.
 
 Create an account with any username, open a BASH console and paste the following lines:
 
+install_libraries.sh
 <code> git clone https://github.com/visaub/Forum-Registrer <br> 
 cd Forum-Registrer <br>
 pip install Flask <br>
