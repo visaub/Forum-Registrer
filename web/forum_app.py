@@ -51,7 +51,7 @@ def load_user(userID):
 
 app.config.update(
     DEBUG = False,
-    SECRET_KEY = 'IM_A_SECRET_U_CANT_SEE_ME'
+    SECRET_KEY = 'IM_A_SECRET_U_CANT_SEE_ME. Victor wapo'
 )
 
 def act_valid_required(f):
@@ -121,7 +121,7 @@ class Alum():
             conn.close()
             return abort(401)
     def __repr__(self):
-        return self.unif
+        return self.name+', '+self.surname+' = '+self.unif
     def get(self, key):
         return self.key
     def __setattr__(self, key, value):
@@ -150,7 +150,6 @@ class Act():
     def __init__(self, actID = 0):
         conn = sqlite3.connect(LoadDataBase())
         curs = conn.cursor()
-
         if actID:
             self.__dict__['actID'] = actID
             curs.execute('SELECT * FROM acts WHERE actID=?', (actID,))
@@ -277,9 +276,10 @@ def load_alums():
         raise ValueError("the separator must be either '\t', ';' or ','")
     ls=s.split('\n')
     matches=[];
-    for e in ls[1:-1]:
-        le=e.split(sep)
-        matches.append(le)
+    for e in ls[1:]:
+        if len(e.split(sep))>2:
+            le=e.split(sep)
+            matches.append(le)
     return matches
 
 def load_colabs():
@@ -295,8 +295,8 @@ def load_colabs():
         raise ValueError("the separator must be either '\t', ';' or ','")
     l=s.split('\n')
     ll=[]
-    for e in l:
-        if len(e.split(sep))>1:
+    for e in l[1:]:
+        if len(e.split(sep))>2:
             ll.append(e.split(sep))
     return ll
 
@@ -313,8 +313,8 @@ def load_acts():
         raise ValueError("the separator must be either '\t', ';' or ','")
     l=s.split('\n')
     ll=[]
-    for e in l:
-        if len(e.split(sep))>1:
+    for e in l[1:]:
+        if len(e.split(sep))>2:
             ll.append(e.split(sep))
     return ll
 
@@ -344,7 +344,7 @@ def add_alum(name,surname1,surname2):
     conn.commit()
     conn.close()
 
-@app.route('/init_colabs')
+#@app.route('/init_colabs')
 def initDB_colabs():
     conn = sqlite3.connect(LoadDataBase())
     curs = conn.cursor()
@@ -364,7 +364,7 @@ def initDB_colabs():
             print(mensaje)
     conn.commit()
     conn.close()
-    return render_template('text.html', title='Success', message='Colabs initiated')
+    #return render_template('text.html', title='Success', message='Colabs initiated')
 
 def add_act_to_alums(i):
     conn = sqlite3.connect(LoadDataBase())
@@ -402,7 +402,7 @@ def initDB_acts():
     conn.close()
     for logfile in os.listdir(data_path+'/logs'):
         os.remove(data_path+'/logs/'+logfile)
-    for i in range(1, len(acts)):
+    for i in range(1, len(acts)+1):
         add_act_to_alums(i)
     #return render_template('text.html', title='Success', message='Activities initiated')
 
@@ -660,25 +660,10 @@ def act(set_next):
 def thank_you():
     return render_template('thank_you.html',title='About')
 
-
-#@app.route('/reset')     #development porpouse
-def reset():
-    f=open(data_path+'/log.txt','w');
-    f.write('');f.close()
-    ddbb=LoadDataBase()
-    if os.path.isfile(ddbb):
-        os.remove(ddbb)
-    initDB_colabs()
-    initDB_alums()
-    initDB_acts()
-    print('Success. All variables were reset')
-    return render_template('text.html',title='Success', message='All variables were reset')
-
-
 @app.route('/all/<kind>')   #to get activitites and volunteers
 @login_required
 def all_kinds(kind):
-    d={'acts':'activities','colabs':'volunteers','alums':'students'}
+    d={'acts':'activities','colabs':'volunteers','cens':'students'}
     try:
         file=d[kind]
     except KeyError:

@@ -1,15 +1,15 @@
 # git clone https://github.com/visaub/Forum-Registrer
 cd Forum-Registrer
 
+mkvirtualenv myenv36 --python=/usr/bin/python3.6
+workon myenv36
+
 install_list=(
     'flask'
     'flask_login'
-    'sqlite3'
     'requests'
-    'time'
     'unidecode'
     'datetime'
-    'os'
     'bs4'
    )
 #
@@ -23,3 +23,4 @@ do
    pip3 install --user ${install_list[count]}
 done
 echo -e 'Libraries installed.'
+
