@@ -6,13 +6,10 @@ For deploying this web-app it is highly recommended to use <a href='https://www.
 
 <h3> Starting </h3>
 
-Create an account with any username, open a BASH console and paste the following lines:
+Create an account with any username, open a BASH console and paste the following line:
 
-install_libraries.sh
-<code> git clone https://github.com/visaub/Forum-Registrer <br> 
-cd Forum-Registrer <br>
-pip install Flask <br>
-pip install requests </code>
+<code> git clone https://github.com/visaub/Forum-Registrer && cd Forum-Registrer && bash install_libraries.sh </code> 
+
 
 Then, go to the 'Web' tab and create a new webapp using Flask and Python3. The application is located at the script forum_app.py. The 'Source Code' and 'Working directory' must point to the folder where forum_app.py is located.
 
