@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # git clone https://github.com/visaub/Forum-Registrer
 
 install_list=(
