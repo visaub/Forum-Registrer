@@ -6,8 +6,11 @@
 from forum_app import initDB_colabs, initDB_alums, initDB_acts, LoadDataBase, data_path
 import os
 import sys
+import platform
 
 current_user=os.environ.get('USER')
+if current_user==None:
+    current_user='DOESNT_MATTER_BECAUSE_NOT_USED'
 wsgi_file="""
 import sys
 import os
@@ -40,12 +43,14 @@ def reset():
     initDB_colabs()
     initDB_alums()
     initDB_acts()
-    print('Success. All variables were reset')
-    #return render_template('text.html',title='Success', message='All variables were reset')
+    print('Success. The database was initialized with the information stored on the .csv files')
+    #return render_template('text.html',title='Success', message='The database was initialized with the information stored on the .csv files')
 
 
 def write_new_wsgi():
 	current_user=os.environ.get('USER')
+    if current_user==None:
+        current_user='DOESNT_MATTER_BECAUSE_NOT_USED'
 	print('Current user: '+current_user)
 	#print("Hello people, it's me. ")
     #domain=input("Are you going to use: ")
@@ -57,6 +62,6 @@ def write_new_wsgi():
 
 if __name__=='__main__':
     reset()
-    write_new_wsgi()
-    #var/www/forum_pythonanywhere_com_wsgi.py
+    if 'Windows' not in platform.platform():
+        write_new_wsgi()   #like:  var/www/forum_pythonanywhere_com_wsgi.py
 

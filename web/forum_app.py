@@ -9,7 +9,15 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, curren
 from functools import wraps
 from bs4 import BeautifulSoup as soup
 
-from config import margin, time_change
+### User variables ###
+
+from config import margin, time_change, debug
+
+import platform
+pm=platform.platform()
+debug=debug or 'Windows' in pm   # If the app is executed on Windows then it is likely to be on development.
+
+### UPC ID Scrapper ###
 
 def get_info(url):
     r=requests.get(url)
@@ -50,7 +58,7 @@ def load_user(userID):
     return Colab(userID=userID)
 
 app.config.update(
-    DEBUG = False,
+    DEBUG = debug,    # initially defined as False, unless the computer runs 'Windows'
     SECRET_KEY = 'IM_A_SECRET_U_CANT_SEE_ME. Victor wapo'
 )
 
@@ -500,18 +508,22 @@ def page_not_found(e):
 
 @app.route('/')
 def index():
-    if not request.is_secure:
+    if not request.is_secure and not debug:
         url = request.url.replace('http://', 'https://', 1)
         return redirect(url)
     if current_user.is_authenticated:
         current_user.actual=0
         events=get_events()
         return render_template('index.html', name=current_user.name, events=events, yeah=False)
-    return render_template('welcome.html')
+    if not_installed:
+        return render_template('reset_required.html')
+    else:
+        return render_template('welcome.html')
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if not request.is_secure:
+    if not request.is_secure and not debug:
         url = request.url.replace('http://', 'https://', 1)
         return redirect(url)
     if request.method == 'POST':
@@ -609,7 +621,7 @@ def pau():
 @login_required
 def log():
     events=get_events();
-    if current_user.admin or True: events['All people so far']=[('Master log',0)]
+    if current_user.admin or True: events['All people so far']=[('Master log',0)]  #development?
     return render_template('logs.html', name=current_user.name, events=events, yeah=False)
 
 @app.route('/log/<int:actID>')
@@ -733,3 +745,7 @@ def sort_by_hours():
     return send_file(data_path+'/total.csv', as_attachment=True)
     return [render_template('text.html',message=message,title=title),send_file(data_path+'/total.csv', as_attachment=True)]
 
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

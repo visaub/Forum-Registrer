@@ -2,6 +2,10 @@
 
 # git clone https://github.com/visaub/Forum-Registrer
 
+# mkvirtualenv myforum --python=/usr/bin/python3.6
+# workon myforum
+activate fr
+
 install_list=(
     'flask'
     'flask_login'
