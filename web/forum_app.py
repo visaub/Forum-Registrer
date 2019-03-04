@@ -515,7 +515,8 @@ def index():
         current_user.actual=0
         events=get_events()
         return render_template('index.html', name=current_user.name, events=events, yeah=False)
-    if not_installed:
+    ddbb=LoadDataBase()
+    if not os.path.isfile(ddbb):
         return render_template('reset_required.html')
     else:
         return render_template('welcome.html')

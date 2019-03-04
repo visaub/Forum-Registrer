@@ -24,9 +24,9 @@ Feel free to edit the templates, add your logo, change the CCS and customize any
 <h3> Add Participants, Activities and Volunteers to the database (required)</h3>
 
 Upload the three documents with these <b>exact</b> names on the 'data' folder:
-<b>- Cens.csv</b> (Participants)
-<b>- Acts.csv</b> (Activities)
-<b>- Colabs.csv</b> (Volunteers)
+-<b>Cens.csv</b> (Participants)
+-<b>Acts.csv</b> (Activities)
+-<b>Colabs.csv</b> (Volunteers)
 
 Cens.csv contains the Name, First Surname and Second Surname of all the people that can attend your events.
 Acts.csv is a file with the activities. The structure is the following: 'Kind of activity;Name of Activity;Start time;End time;counts'. counts is a bool (0 or 1), if (counts == 1) then the duration of the activity is added up to the number of hours a person has completed
