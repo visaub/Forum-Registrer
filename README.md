@@ -24,16 +24,19 @@ Feel free to edit the templates, add your logo, change the CCS and customize any
 <h3> Add Participants, Activities and Volunteers to the database (required)</h3>
 
 Upload the three documents with these <b>exact</b> names on the 'data' folder:
+
 -<b>Cens.csv</b> (Participants)
+
 -<b>Acts.csv</b> (Activities)
+
 -<b>Colabs.csv</b> (Volunteers)
 
 Cens.csv contains the Name, First Surname and Second Surname of all the people that can attend your events.
-Acts.csv is a file with the activities. The structure is the following: 'Kind of activity;Name of Activity;Start time;End time;counts'. counts is a bool (0 or 1), if (counts == 1) then the duration of the activity is added up to the number of hours a person has completed
+Acts.csv is a file with the activities. The structure is the following: 'Kind of activity;Name of Activity;Start time;End time;counts'. counts is a bool (0 or 1), if (counts == 1) then the duration of the activity is added up to the number of hours a person has completed.
 Colabs.csv holds the information of the volunteers, 'Username;Password;Name;is_admin'. The username and password are requiered to login on the platform. is_admin == 1 allows the user to access more menus and log people in on all activities, whereas a regular user (is_admin == 0) can only see the activities that take place at that moment.
 
-It is very important that these three files contain correct and complete information.
-Load the information going to forum_app.py, hitting RUN and typing <code>reset()</code> on the command prompt that pops up.
+It is very important that these three <b>.csv</b> files contain correct and complete information.
+Load the information oppening the console on the <b>/Forum-Registrer/web/</b> directory and running <code>python reset.py</code>.
 After this step it is not possible to add new People, Activities or Volunteers to the app, nor to modify the ones loaded, so only reset when you are sure the information is correct. (On future this will be fixed.)
 
 <h3>And you are ready to go!</h3>
