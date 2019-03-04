@@ -749,4 +749,5 @@ def sort_by_hours():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=debug)  
+    #This is not going to be run, because online a WSGI file is used and on FLASK >= 1.0 the use of FLASK RUN if encouraged

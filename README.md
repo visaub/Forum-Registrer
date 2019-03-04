@@ -8,8 +8,9 @@ For deploying this web-app it is highly recommended to use <a href='https://www.
 
 Create an account with any username, open a BASH console and paste the following lines:
 
-<code> git clone https://github.com/visaub/Forum-Registrer </code>
-<code> cd Forum-Registrer  </code> 
+<code> git clone https://github.com/visaub/Forum-Registrer
+
+cd Forum-Registrer</code>
 <code> mkvirtualenv myenv36 --python=/usr/bin/python3.6</code>
 <code> workon myenv36 </code>
 <code> bash install_libraries.sh </code>
@@ -45,6 +46,6 @@ Note: to use camera to scan the QR code of the UPC ID the server must be able to
 
 It is recommended to read the user guide (now in Spanish). 
 
-Finally, after your event is over, you can download a .csv with the number of hours and activities each participant took. Log in as an admin and type on the address bar your webpage followed by /reset.
+Finally, after your event is over, you can download a .csv with the number of hours and activities each participant took. Log in as an admin and type on the address bar your webpage followed by <code>/hours</code>.
 
 <b>Enjoy!</b>
