@@ -14,7 +14,7 @@ Create an account with any username, open a BASH console and paste the following
 - `workon myenv36`
 - `bash install_libraries.sh`
 
-Then, go to the 'Web' tab and create a new webapp, using 'Manual Configuration' and 'Python 3.6'. The application is located at the script forum_app.py. The 'Source Code' and 'Working directory' must point to the folder where **forum_app.py** is located, usually the path is '/home/**your_pythonanywhere_username**/Forum-Registrer/web/'. On 'Virtualenv', you have to write `myenv36`, because it is the Virutal Environment that was created before and will host the app.
+Then, go to the **Web** tab and create a new webapp, using _Manual Configuration_ and _Python 3.6_. The application is located at the script forum_app.py. The _Source Code_ and _Working directory_ must point to the folder where **forum_app.py** is located, usually the path is '/home/**your_pythonanywhere_username**/Forum-Registrer/web/'. On 'Virtualenv', you have to write `myenv36`, because it is the Virutal Environment that was created before and will host the app.
 
 ### Custom
 
@@ -51,14 +51,14 @@ _Colabs.csv_ holds the information of the volunteers.
 
 Header:**Username;Password;Name;is_admin**
 
-The username and password are requiered to login on the platform. `is_admin == 1` allows the user to access more menus and log people in on all activities, whereas a regular user `(is_admin == 0)` can only see the activities that take place at that moment.
+The username and password are requiered to login on the platform. `(is_admin == 1)` allows the user to access more menus and log people in on all activities, whereas a regular user `(is_admin == 0)` can only see the activities that take place at that moment.
 
 It is very important that these three <b>.csv</b> files contain correct and complete information. An example of these files could be found <a href='https://github.com/visaub/Forum-Registrer/tree/master/web/EXAMPLES'> on this link </a>.
 
 Load the information oppening the console on the <b>/Forum-Registrer/web/</b> directory and running:
 
-`workon myenv36`
-`python reset.py`
+- `workon myenv36`
+- `python reset.py`
 
 After this step it is not possible to add new People, Activities or Volunteers to the app, nor to modify the ones loaded, so only reset when you are sure the information is correct. (On the future this feature will be included.)
 

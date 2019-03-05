@@ -8,9 +8,9 @@ import os
 import sys
 import platform
 
-current_user=os.environ.get('USER')
-if current_user==None:
-    current_user='DOESNT_MATTER_BECAUSE_NOT_USED'
+bash_user=os.environ.get('USER')
+if bash_user==None:
+    bash_user='DOESNT_MATTER_BECAUSE_NOT_USED'
 wsgi_file="""
 import sys
 import os
@@ -27,7 +27,7 @@ import os
 
 current_user=os.environ.get('USER')
 print(current_user)
-path = '/home/"""+current_user+"""/Forum-Registrer/web'
+path = '/home/"""+bash_user+"""/Forum-Registrer/web'
 if path not in sys.path:
     sys.path.append(path)
 from forum_app import app as application  # noqa
@@ -48,17 +48,17 @@ def reset():
 
 
 def write_new_wsgi():
-	current_user=os.environ.get('USER')
-    if current_user==None:
-        current_user='DOESNT_MATTER_BECAUSE_NOT_USED'
-	print('Current user: '+current_user)
-	#print("Hello people, it's me. ")
+    bash_user=os.environ.get('USER')
+    if bash_user == None:
+        bash_user='DOESNT_MATTER_BECAUSE_NOT_USED'
+    print('Current user: '+bash_user)
+    #print("Hello people, it's me. ")
     #domain=input("Are you going to use: ")
-	path_wsgi='/var/www/'+current_user+'_pythonanywhere_com_wsgi.py'
-	f=open(path_wsgi,'w')
-	f.write(wsgi_file)
-	f.close()
-	print('Success. WSGI file generated')
+    path_wsgi='/var/www/'+bash_user+'_pythonanywhere_com_wsgi.py'
+    f=open(path_wsgi,'w')
+    f.write(wsgi_file)
+    f.close()
+    print('Success. WSGI file generated')
 
 if __name__=='__main__':
     if os.path.isfile(LoadDataBase('acts.csv')):
@@ -75,7 +75,6 @@ if __name__=='__main__':
         print('Failure: Missing "acts.csv"')
         exit(0)
 
-    reset()
     if 'Windows' not in platform.platform():
         write_new_wsgi()   #like:  var/www/forum_pythonanywhere_com_wsgi.py
 

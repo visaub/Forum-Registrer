@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{title}}</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="content container">
+        <div class="margin-top">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="text-center">Showing all {{title}}</h4>
+                    </div>
+                    <div class="panel-body">
+                          <!-- <h2>{{title}}</h2> -->
+  <p>The table shows the registered entries of {{title}}</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+    {% for header in litems[0] %}
+    <th>{{header}}</th>
+    {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in litems[1:] %}
+      <tr>
+        {% for point in item %}
+        <td>{{point}}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+</div>
+
+{% endblock %}

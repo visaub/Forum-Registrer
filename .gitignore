@@ -3,5 +3,6 @@ foo\[01\].txt
 *.txt
 *.sql
 *.pyc
+*.csv
 .cache/
 __pycache__/

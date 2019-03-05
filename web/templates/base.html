@@ -9,7 +9,8 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/main.css">
     <meta name="theme-color" content="#494949">
-    <meta name="author" content="IT, Forum ETSEIB 2018">
+    <meta name="author" content="Victor Sainz, IT Forum ETSEIB 2018">
+    <meta name="blog" content="https://visaub.com">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Ek+Mukta" rel="stylesheet">
@@ -33,7 +34,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand white-text" href="/">Registration menu</a>
+                <a class="navbar-brand white-text" href="/">Registration main menu</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right ">
@@ -44,16 +45,15 @@
                                aria-expanded="false">{{current_user.name}} {% if current_user.admin %}(Admin){% endif %}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 {% if current_user.is_authenticated %}
-                                <li><a href='/log'>Logs</a></li>
+                                <!--li><a href='/log'>Logs</a></li-->
                                 {% if current_user.admin %}
-                                <!--<li><a href='/hours'>Hours of all students</a></li>-->
-                                <li><a href="/all/colabs">Volunteers</a></li>
-                                <li><a href="/all/acts">Activities</a></li>
+                                <li><a href='/hours'>Export Hours of all students to .csv file</a></li>
+                                <li><a href="/all/colabs">Show all volunteers</a></li>
+                                <li><a href="/all/cens">Show all participants</a></li>
                                 <!--<li><a href="/reset">Reset</a></li>-->
                                 {% endif %}
                                 {% endif %}
-
-                                <!--<li><a href="/counter/1">Counter</a></li>-->
+                                <li><a href="/all/acts">Show all activities</a></li>
                                 <li><a href="/logout">Logout</a></li>
                                 <li><a href="https://forumetseib.upc.edu">Main webpage</a></li>
                             </ul>
@@ -72,13 +72,13 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 text-left text-center-xs">
                 <p><a href='/'>Forum Registration Assistant</a></p>
             </div>
             <div class="col-sm-6 text-right text-center-xs">
                 <p><a href='/thank_you'>About</a></p>
             </div>
-            <!--<div class="social-icons col-sm-6 text-right text-center-xs">
+            <!--div class="social-icons col-sm-6 text-center text-center-xs">
 
                     <a class="btns" target="_blank" href="https://twitter.com/forumetseib">
                         <i aria-hidden="true" class="fa fa-twitter fa-lg"></i>
@@ -95,8 +95,10 @@
                     </a>
 
             </div>-->
+        </div>
+        <div class="row">
             <div class="col-md-12 text-center">
-                <small>Made with ❤ by <strong><a href='https://forumetseib.upc.edu' >Forum ETSEIB 2018</a></strong></small>
+                Made with ❤ by <strong><a href='https://forumetseib.upc.edu' >Forum ETSEIB</a></strong>
             </div>
         </div>
     </div>

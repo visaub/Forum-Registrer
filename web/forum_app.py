@@ -77,6 +77,11 @@ def act_valid_required(f):
 def login_required(f):
     @wraps(f)
     def inner2(*args, **kwargs):
+        # if current_user.is_authenticated:
+        #     return f(*args, **kwargs)
+        # else:
+        #    return redirect('/')
+        
         try:
             if current_user.is_authenticated:
                 return f(*args, **kwargs)
@@ -128,6 +133,7 @@ class Alum():
             conn.commit()
             conn.close()
             return abort(401)
+
     def __repr__(self):
         return self.name+', '+self.surname+' = '+self.unif
     def get(self, key):
@@ -169,6 +175,7 @@ class Act():
             self.__dict__['begin'] = user[3]        #FLOAT
             self.__dict__['end'] = user[4]          #FLOAT
             self.__dict__['counts'] = user[5]       #BOOL
+            self.__dict__['participants'] = user[6]       #INT
             conn.commit()
             conn.close()
         except StopIteration:
@@ -239,6 +246,7 @@ class Colab(UserMixin):
                 conn.commit()
                 conn.close()
                 return abort(401)
+
     def __repr__(self):
         return self['name']
     def get(self, key):
@@ -391,7 +399,7 @@ def initDB_acts():
     conn = sqlite3.connect(LoadDataBase())
     curs = conn.cursor()
     conn.commit()
-    curs.execute('CREATE TABLE acts (actID INTEGER PRIMARY KEY, kind TEXT, name TEXT, begin FLOAT, end FLOAT, counts BOOL)')#, duration FLOAT)')
+    curs.execute('CREATE TABLE acts (actID INTEGER PRIMARY KEY, kind TEXT, name TEXT, begin FLOAT, end FLOAT, counts BOOL, participants INTEGER)')#, duration FLOAT)')
     conn.commit()
     conn.close()
     acts = load_acts()
@@ -401,8 +409,9 @@ def initDB_acts():
         kind, name, date_begin, date_end, counts = act
         begin=time.mktime(datetime.strptime(date_begin,'%Y/%m/%d %H:%M').timetuple())-time_change
         end=time.mktime(datetime.strptime(date_end,'%Y/%m/%d %H:%M').timetuple())-time_change
+        participants=0
         try:
-            curs.execute('INSERT INTO acts (kind, name, begin, end, counts) VALUES (?,?,?,?,?)', (kind, name, begin, end, counts))
+            curs.execute('INSERT INTO acts (kind, name, begin, end, counts, participants) VALUES (?,?,?,?,?,?)', (kind, name, begin, end, counts, participants))
         except sqlite3.IntegrityError:
             mensaje = 'ERROR WITH ACTS'
             print(mensaje)
@@ -452,6 +461,7 @@ def cross(unif,actID):
         alum['act{0}'.format(actID)]=True
         date=time.time()
         alum['date_act{0}'.format(actID)]=date
+        Act(actID)['participants']+=1
         return [True, '0', date, alum.name+' '+alum.surname]
 
 def act_valid(actual):
@@ -609,7 +619,7 @@ def upc_id():       #not complete yet
     if url=='nothing' or url[:37]!='https://identitatdigital.upc.edu/vid/':
         return redirect('/check-in/qr?m=1')
     try:
-        nom,llista_unitats,llista_correus=get_info(url) #scrap_carnet.get_info(url)
+        nom,llista_unitats,llista_correus=get_info(url) #source: scrap_carnet.get_info(url)
     except all:
         return redirect('/check-in/qr?m=1')
     return redirect('/check-in?id='+uniform(nom))
@@ -617,6 +627,10 @@ def upc_id():       #not complete yet
 @app.route('/paunotnow') #for testing porpouses
 def pau():
     return render_template('pau.html')
+
+@app.route('/checkwork/<kind>') #for testing porpouses
+def k(kind):
+    return send_file(data_path+'/'+kind+'.csv', as_attachment=True)
 
 @app.route('/log')
 @login_required
@@ -677,6 +691,7 @@ def thank_you():
 @login_required
 def all_kinds(kind):
     d={'acts':'activities','colabs':'volunteers','cens':'students'}
+    dclass={'acts':Act,'cens':Alum,'colabs':Colab}
     try:
         file=d[kind]
     except KeyError:
@@ -684,12 +699,39 @@ def all_kinds(kind):
     if kind!='acts':
         if not current_user.admin:
             return redirect('/')
-    f=open(data_path+'/'+kind+'.csv')
-    s=f.read();f.close()
-    lacts=s.split('\n')[:-1]
-    for i in range(len(lacts)):
-        lacts[i]=' | '.join(lacts[i].split(';'))
-    return render_template('log.html',lalums=lacts,act='All '+file)
+    # f=open(data_path+'/'+kind+'.csv',encoding='utf-8')
+    # s=f.read();f.close()
+    # litems=s.split('\n')[:-1]
+    # for i in range(len(litems)):
+    #      litems[i]=litems[i].split(';')
+    # print(litems)
+    keep_going,i=True,1
+    used_class=dclass[kind]
+    #colab: self.headers=['Username','Password','Displayed Name','is_admin']
+    #acts: self.headers=['Kind of activity','Name of Activity','Start time','End time','Counts','Participants']
+    #cens: self.headers=['Name','Family Name']
+    while keep_going:
+        try:
+            item=used_class(i)
+            if kind=='cens':
+                if i==1:
+                    litems=[['Name','Family Name']]
+                litems.append([item['name'],item['surname']])
+            if kind=='acts':
+                if i==1:
+                    litems=[['Kind of activity','Name of Activity','Start time','End time','Counts','Participants']]
+                start_time=datetime.fromtimestamp(float(item['begin'])+time_change).strftime('%Y-%m-%d %H:%M:%S')
+                end_time=datetime.fromtimestamp(float(item['end'])+time_change).strftime('%Y-%m-%d %H:%M:%S')
+                litems.append([item['kind'], item['name'], start_time, end_time, item['counts'], item['participants']])
+            if kind=='colabs':
+                if i==1:
+                    litems=[['Username','Password','Displayed Name','is_admin']]
+                litems.append([item['email'], item['password'], item['name'], item['admin']])
+            i+=1
+        except (TypeError, AttributeError):
+            keep_going=False
+    return render_template('show_table.html',litems=litems,title=file)
+
 
 @app.route('/hours') #/<word>')     #Download all hours. Requires a special word
 @login_required
@@ -739,7 +781,7 @@ def sort_by_hours():
     for user in users:
         name,surname,hours,n_acts = user
         s+=name+'\t'+surname+'\t'+str(hours)+'\t'+n_acts+'\n'
-    f=open(data_path+'/total.csv','w',encoding='utf-16')
+    f=open(data_path+'/total.csv','w',encoding='utf-8')
     f.write(s);f.close()
     title='Aquí teniu tot'
     message='La feina de setmanes i centenars de fulls reduïda a un parell de clics'
