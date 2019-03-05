@@ -63,6 +63,7 @@ Load the information oppening the console on the <b>/Forum-Registrer/web/</b> di
 
 After this step it is not possible to add new People, Activities or Volunteers to the app, nor to modify the ones loaded, so only reset when you are sure the information is correct. (On the future this feature will be included.)
 
+After that, you must reload the webapp.
 <h3>And you are ready to go!</h3>
 
 Note: to use camera to scan the QR code of the UPC ID the server must be able to access https://identitatdigital.upc.edu. On pythonanywhere that is only possible with an upgraded account, with prices starting at 5 $/month.

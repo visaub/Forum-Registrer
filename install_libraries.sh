@@ -4,7 +4,7 @@
 
 # mkvirtualenv myforum --python=/usr/bin/python3.6
 # workon myforum
-activate fr
+# activate fr
 
 install_list=(
     'flask'
