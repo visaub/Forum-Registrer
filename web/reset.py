@@ -61,6 +61,20 @@ def write_new_wsgi():
 	print('Success. WSGI file generated')
 
 if __name__=='__main__':
+    if os.path.isfile(LoadDataBase('acts.csv')):
+        if os.path.isfile(LoadDataBase('cens.csv')):
+            if os.path.isfile(LoadDataBase('colabs.csv')):
+                reset()  #
+            else: 
+                print('Failure: Missing "colabs.csv"')
+                exit(0)
+        else:
+            print('Failure: Missing "cens.csv"')
+            exit(0)
+    else: 
+        print('Failure: Missing "acts.csv"')
+        exit(0)
+
     reset()
     if 'Windows' not in platform.platform():
         write_new_wsgi()   #like:  var/www/forum_pythonanywhere_com_wsgi.py
