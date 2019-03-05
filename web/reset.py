@@ -14,9 +14,9 @@ if current_user==None:
 wsgi_file="""
 import sys
 import os
-from dotenv import load_dotenv
-project_folder = os.path.expanduser('~/myenv36')  # adjust as appropriate
-load_dotenv(os.path.join(project_folder, '.env'))
+#from dotenv import load_dotenv
+#project_folder = os.path.expanduser('~/myenv36')  # adjust as appropriate
+#load_dotenv(os.path.join(project_folder, '.env'))
 #
 ## The "/home/forum" below specifies your home
 ## directory -- the rest should be the directory you uploaded your Flask
