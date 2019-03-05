@@ -8,11 +8,14 @@ For deploying this web-app it is highly recommended to use <a href='https://www.
 
 Create an account with any username, open a BASH console and paste the following lines:
 
-<code> git clone https://github.com/visaub/Forum-Registrer
+<code> git clone https://github.com/visaub/Forum-Registrer</code>
 
-cd Forum-Registrer</code>
+<code> cd Forum-Registrer</code>
+
 <code> mkvirtualenv myenv36 --python=/usr/bin/python3.6</code>
+
 <code> workon myenv36 </code>
+
 <code> bash install_libraries.sh </code>
 
 
