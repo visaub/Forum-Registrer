@@ -611,10 +611,13 @@ def qr():
 @login_required
 @act_valid_required
 def upc_id():       #not complete yet
-    url_VS='https://identitatdigital.upc.edu/vid/MI0E4LO3JYKXFW'
+    url_VS='https://identitatdigital.upc.edu/vid/MI0E4LO3JYKXFW'  #UPC id of the creator: Victor Sainz
     url=str(request.args.get('q','nothing'))
     print(url)
-    f=open(data_path+'/url_qr.txt','a')
+    if os.path.isfile(data_path+'/url_qr.txt'):
+        f=open(data_path+'/url_qr.txt','a')
+    else:
+        f=open(data_path+'/url_qr.txt','w')
     f.write(url+'\n');f.close()
     if url=='nothing' or url[:37]!='https://identitatdigital.upc.edu/vid/':
         return redirect('/check-in/qr?m=1')
