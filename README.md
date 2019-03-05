@@ -39,15 +39,23 @@ All files have to include their respective headers.
 
 <h4>Participants</h4>
 Cens.csv contains the Name, First Surname and Second Surname of all the people that can attend your events.
+
 Header: <b>Name;First_family_name;Second_family_name</b>
 
 
 <h4>Activities</h4>
 
-Acts.csv is a file with the activities. Header: <b>Kind of activity;Name of Activity;Start time;End time;counts</b>. <code>counts</code> is a bool (0 or 1), if (counts == 1) then the duration of the activity is added up to the number of hours a person has completed.
+Acts.csv is a file with the activities. 
+
+Header: <b>Kind of activity;Name of Activity;Start time;End time;counts</b>. 
+<code>counts</code> is a bool (0 or 1), if (counts == 1) then the duration of the activity is added up to the number of hours a person has completed.
 
 <h4>Volunteers</h4>
-Colabs.csv holds the information of the volunteers. Header:<b>Username;Password;Name;is_admin</b>. The username and password are requiered to login on the platform. <code>is_admin == 1 </code> allows the user to access more menus and log people in on all activities, whereas a regular user (is_admin == 0) can only see the activities that take place at that moment.
+Colabs.csv holds the information of the volunteers. 
+
+Header:<b>Username;Password;Name;is_admin</b>. 
+
+The username and password are requiered to login on the platform. <code>is_admin == 1 </code> allows the user to access more menus and log people in on all activities, whereas a regular user (is_admin == 0) can only see the activities that take place at that moment.
 
 It is very important that these three <b>.csv</b> files contain correct and complete information.
 
