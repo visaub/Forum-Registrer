@@ -1,6 +1,6 @@
 # Forum Registrer
 
-App that can be used for the check in of attendances on big events with many activities. It includes a QR scanner. Credit most be given to <a href="https://github.com/HackAssistant/registration">HackAssistant</a> and <a href="https://github.com/jandrikus">Jandrikus</a>.
+App that can be used for the check in of attendances on big events with many activities. It includes a QR scanner. Credit must be given to <a href="https://github.com/HackAssistant/registration">HackAssistant</a> and <a href="https://github.com/jandrikus">Jandrikus</a>.
 
 For deploying this web-app it is highly recommended to use <a href='https://www.pythonanywhere.com'> pythonanywhere</a>, because it the easiest platform to use.
 
