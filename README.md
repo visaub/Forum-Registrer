@@ -1,4 +1,16 @@
+
+<br>
+<p align="center">
+  <img alt="Logo Forum ETSEIB" src="https://raw.githubusercontent.com/visaub/Forum-Registrer/master/web/static/images/999981.png" width="10%"/>
+</p>
+<br>
+
 # Forum Registrer
+
+
+
+
+
 
 App that can be used to manage the check-in process of participants on fairs with many activities. 
 
