@@ -36,30 +36,33 @@ Feel free to edit the templates, add your logo, change the CCS and customize any
 
 Upload the three documents with these <b>exact</b> names on the 'data' folder:
 
-- **Cens.csv** (Participants)
+- **cens.csv** (Participants)
 
-- **Acts.csv** (Activities)
+- **acts.csv** (Activities)
 
-- **Colabs.csv** (Volunteers)
+- **colabs.csv** (Volunteers)
 
 All files have to include their respective headers.
+**Important**: the files must be saved with encoding **UTF-8**, otherwise pythonanywhere.com will not be able to read them.
 
 ### Participants
-_Cens.csv_ contains the Name, First Surname and Second Surname of all the people that can attend your events.
+_cens.csv_ contains the Name, First Surname and Second Surname of all the people that can attend your events.
 
 Header: **Name;First_family_name;Second_family_name**
 
 
 ### Activities
 
-Acts.csv is a file with the activities. 
+_acts.csv_ is a file with the activities. 
 
 Header: **Kind of activity;Name of Activity;Start time;End time;counts**. 
-_counts_ is a bool (0 or 1), if `(counts == 1)` then the duration of the activity is added up to the number of hours a person has completed.
+_counts_ is a bool (0 or 1), if `(counts == 1)` then the duration of the activity is added up to the number of hours a person has completed. 
+
+The times must follow the format: '%Y/%m/%d %H:%M' (examples: "2018/03/06 9:00", "2018/03/07 12:00").
 
 ### Volunteers
 
-_Colabs.csv_ holds the information of the volunteers. 
+_colabs.csv_ holds the information of the volunteers. 
 
 Header:**Username;Password;Name;is_admin**
 

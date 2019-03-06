@@ -38,14 +38,14 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right ">
-                            <li class="white-text"><a href="/log">Logs</a></li>
+                        <li class="white-text"><a href="/">Index</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true"
                                aria-expanded="false">{{current_user.name}} {% if current_user.admin %}(Admin){% endif %}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 {% if current_user.is_authenticated %}
-                                <!--li><a href='/log'>Logs</a></li-->
+                                <li><a href='/log'>Logs</a></li>
                                 {% if current_user.admin %}
                                 <li><a href='/hours'>Export Hours of all students to .csv file</a></li>
                                 <li><a href="/all/colabs">Show all volunteers</a></li>
@@ -73,7 +73,7 @@
         <div class="row">
 
             <div class="col-sm-6 text-left text-center-xs">
-                <p><a href='/'>Forum Registration Assistant</a></p>
+                <p><a href='https://github.com/visaub/Forum-Registrer'>Forum Registration Assistant</a></p>
             </div>
             <div class="col-sm-6 text-right text-center-xs">
                 <p><a href='/thank_you'>About</a></p>
