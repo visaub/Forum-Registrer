@@ -1,6 +1,8 @@
 # Forum Registrer
 
-App that can be used to manage the check-in process of participants on fairs with many activities. Initially developed and used by **Forum ETSEIB**, https://forumetseib.upc.edu, a job fair for industrial engineering students at UPC, Barcelona. 
+App that can be used to manage the check-in process of participants on fairs with many activities. 
+
+Initially developed by **Forum ETSEIB** and used since 2018, https://forumetseib.upc.edu, the job fair for industrial engineering students at UPC, Barcelona. 
 
 ### Fetures:
 - Import data from .csv files
@@ -21,11 +23,14 @@ Create an account with any username, open a BASH console and paste the following
 - `workon myenv36`
 - `bash install_libraries.sh`
 
-Then, go to the **Web** tab and create a new webapp, using _Manual Configuration_ and _Python 3.6_. The application is located at the script forum_app.py. The _Source Code_ and _Working directory_ must point to the folder where **forum_app.py** is located, usually the path is '/home/**your_pythonanywhere_username**/Forum-Registrer/web/'. On 'Virtualenv', you have to write `myenv36`, because it is the Virutal Environment that was created before and will host the app.
+Then, go to the **Web** tab and create a new webapp, using _Manual Configuration_ and _Python 3.6_. The application is located at the script forum_app.py. The _Source Code_ and _Working directory_ must point to the folder where **forum_app.py** is located, usually the path is: 
+-_/home/**your_pythonanywhere_username**/Forum-Registrer/web/_. 
+
+On 'Virtualenv', you have to write `myenv36`, because it is the Virutal Environment that was created before and will host the app.
 
 ### Custom
 
-Feel free to edit the templates, add your logo, change the CCS and customize anything you want.
+Feel free to edit the templates, add your logo, change the CCS and customize anything you want on the `static` folder.
 
 ## Add Participants, Activities and Volunteers to the database (required)
 

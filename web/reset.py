@@ -64,6 +64,9 @@ def generate_secret_key():
     return os.urandom(16)     #function not used atm
 
 if __name__=='__main__':
+
+    if 'Windows' not in platform.platform():
+        write_new_wsgi()   #like:  var/www/forum_pythonanywhere_com_wsgi.py
     if os.path.isfile(LoadDataBase('acts.csv')):
         if os.path.isfile(LoadDataBase('cens.csv')):
             if os.path.isfile(LoadDataBase('colabs.csv')):
@@ -77,7 +80,3 @@ if __name__=='__main__':
     else: 
         print('Failure: Missing "acts.csv"')
         exit(0)
-
-    if 'Windows' not in platform.platform():
-        write_new_wsgi()   #like:  var/www/forum_pythonanywhere_com_wsgi.py
-

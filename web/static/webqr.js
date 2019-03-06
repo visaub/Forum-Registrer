@@ -52,7 +52,7 @@ function htmlEntities(str) {
 }
 
 function read(a) {
-    location.href = '/check-in/read?q='+a   //HERE IS DA GAME!!!! HACK FTW!!!!
+    location.href = '/check-in/read?q='+a   //HERE IS DA GAME!!!! HACK FTW!!!!  hack author: Victor Sainz
 }
 
 function isCanvasSupported() {

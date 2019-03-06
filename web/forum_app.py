@@ -17,7 +17,7 @@ import platform
 pm=platform.platform()
 debug=debug or 'Windows' in pm   # If the app is executed on Windows then it is likely to be on development.
 
-### UPC ID Scrapper ###
+### UPC ID Scrapper ### 
 
 def get_info(url):
     r=requests.get(url)
