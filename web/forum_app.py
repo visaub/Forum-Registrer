@@ -15,7 +15,7 @@ from config import margin, time_change, debug
 
 import platform
 pm=platform.platform()
-debug=debug or ('Windows' in pm) # If the app is executed on Windows then it is likely to be on development.
+debug=debug or 'Windows' in pm # If the app is executed on Windows then it is likely to be on development.
 
 ### UPC ID Scrapper ### 
 
