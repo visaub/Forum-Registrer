@@ -59,7 +59,7 @@ def load_user(userID):
 
 app.config.update(
     DEBUG = debug,    # initially defined as False, unless the computer runs 'Windows'
-    SECRET_KEY = 'IM_A_SECRET_U_CANT_SEE_ME. Victor wapo'
+    SECRET_KEY = os.urandom(16) 
 )
 
 def act_valid_required(f):

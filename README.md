@@ -1,8 +1,15 @@
 # Forum Registrer
 
-App that can be used for the check in of attendances on big events with many activities. It includes a QR scanner. Credit must be given to <a href="https://github.com/HackAssistant/registration">HackAssistant</a> and <a href="https://github.com/jandrikus">Jandrikus</a>.
+App that can be used to manage the check-in process of participants on fairs with many activities. Initially developed and used by **Forum ETSEIB**, https://forumetseib.upc.edu, a job fair for industrial engineering students at UPC, Barcelona. 
 
-For deploying this web-app it is highly recommended to use <a href='https://www.pythonanywhere.com'> pythonanywhere</a>, because it the easiest platform to use.
+### Fetures:
+- Import data from .csv files
+- Volunteers and Organizers can check participants in to available activities. Volunteers have access limited to ongoing activities at the specific time, with a time window.
+- Organizers are able to see complete information about participants and volunteers on a dashboard.
+- Data of the attendance is exportable.
+- Integrated QR scanner to read the code on UPC student ID, visit the URL and scrap the persons data, as an alternative to input the data.
+
+For deploying this web-app it is highly recommended to use <a href='https://www.pythonanywhere.com'> pythonanywhere</a>, because it a platform easy to use and the development was done on it.
 
 ## Starting
 
@@ -73,3 +80,5 @@ It is recommended to read the user guide (now in Spanish).
 Finally, after your event is over, you can download a .csv with the number of hours and activities each participant took. Log in as an admin and type on the address bar your webpage followed by `/hours`.
 
 ## **Enjoy!**
+
+Credit must be given to the team at <a href="https://hackupc.com">HackUPC</a> for the development of <a href="https://github.com/HackAssistant/registration">HackAssistant</a>, on which this project is inspired. Thanks also to Alejandro Alvarez, a.k.a. <a href="https://github.com/jandrikus">Jandrikus</a> and the rest of the team at <a href="https://sosetseib.upc.edu">Sos ETSEIB</a>.

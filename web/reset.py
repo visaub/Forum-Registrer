@@ -60,6 +60,9 @@ def write_new_wsgi():
     f.close()
     print('Success. WSGI file generated')
 
+def generate_secret_key():
+    return os.urandom(16)     #function not used atm
+
 if __name__=='__main__':
     if os.path.isfile(LoadDataBase('acts.csv')):
         if os.path.isfile(LoadDataBase('cens.csv')):
