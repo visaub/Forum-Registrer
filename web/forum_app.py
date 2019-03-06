@@ -15,7 +15,7 @@ from config import margin, time_change, debug
 
 import platform
 pm=platform.platform()
-debug=debug or 'Windows' in pm   # If the app is executed on Windows then it is likely to be on development.
+debug=debug or ('Windows' in pm) # If the app is executed on Windows then it is likely to be on development.
 
 ### UPC ID Scrapper ### 
 
@@ -501,7 +501,7 @@ def get_events():
 @app.errorhandler(401) # handle login failed
 def unauthorized(e):
     title = '401 Error'
-    message = 'Login failed'
+    message = 'Unauthorized error'
     return render_template('text.html', title = title, message = message)
 
 @app.errorhandler(404) # handle not found
