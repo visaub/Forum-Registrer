@@ -631,10 +631,6 @@ def upc_id():       #not complete yet
 def pau():
     return render_template('pau.html')
 
-@app.route('/checkwork/<kind>') #for testing porpouses
-def k(kind):
-    return send_file(data_path+'/'+kind+'.csv', as_attachment=True)
-
 @app.route('/log')
 @login_required
 def log():
@@ -735,6 +731,11 @@ def all_kinds(kind):
             keep_going=False
     return render_template('show_table.html',litems=litems,title=file)
 
+@app.route('/checkwork/<kind>') #for testing porpouses
+# @login_required
+# @admin_required
+def k(kind):
+    return send_file(data_path+'/'+kind+'.csv', as_attachment=True)
 
 @app.route('/hours') #/<word>')     #Download all hours. Requires a special word
 @login_required
@@ -790,7 +791,6 @@ def sort_by_hours():
     message='La feina de setmanes i centenars de fulls reduïda a un parell de clics'
     return send_file(data_path+'/total.csv', as_attachment=True)
     return [render_template('text.html',message=message,title=title),send_file(data_path+'/total.csv', as_attachment=True)]
-
 
 
 if __name__ == '__main__':
