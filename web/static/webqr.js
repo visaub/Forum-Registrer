@@ -52,7 +52,7 @@ function htmlEntities(str) {
 }
 
 function read(a) {
-    location.href = '/check-in/read?q='+a   //HERE IS DA GAME!!!! HACK FTW!!!!  hack author: Victor Sainz
+    location.href = '/check-in/read?q='+a   //HERE IS DA GAME CHANGER!!!! ask Victor Sainz
 }
 
 function isCanvasSupported() {
@@ -147,4 +147,3 @@ function setwebcam2(options) {
     stype = 1;
     setTimeout(captureToCanvas, 500);
 }
-

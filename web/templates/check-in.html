@@ -11,12 +11,23 @@
             <div class="col-md-6 col-md-offset-3">
                 {% if status != '' %}
                 {% if status[0]==True %}
+                {% if status[1]=='0' %}
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <b>APPROVED!</b><b> {{status[3]}} </b>accepted
                     </div>
                 </div>
                 {% endif %}
+
+                {% if status[1]=='42' %}
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <b>APPROVED!</b><b> The mighty creator must always be respected.</b>
+                    </div>
+                </div>
+                {% endif %}                
+                {% endif %}
+
                 {% if status[0]==False %}
                 {% if status[1]=='-1' %}
                 <div class="panel panel-danger">
@@ -42,11 +53,11 @@
                     <div class="panel-body">
 
 
-    <p><h2>Register by QR</h2></p>
+    <!-- <p><h2>Register by QR</h2></p>
     <p>Scan the QR code of the UPC ID</p>
     <a class="btn btn-primary btn-block" href="/check-in/qr">Scan QR</a>
     <br>
-
+ -->
     <p><h2>Search by Name</h2></p>
 
     <form method="post" action="/check-in" class="add_email form-horizontal">

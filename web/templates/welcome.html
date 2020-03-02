@@ -26,16 +26,27 @@
         <div class="form-group"><label class="col-md-3 control-label">Password</label>
             <div class="col-md-9"><input class="form-control" id="id_password" name="password" placeholder="" size="30" title="" type="password" required=""></div>
         </div>
+        <input type="hidden" id="login_time" name="login_time" value="0">
         <div class="form-group">
         <div class="col-md-9"><div class="checkbox"><label for="id_remember"><input class="" id="id_remember" name="remember" type="checkbox"> Remember Me</label></div>
         </div></div>
-        <button name="action_add" class="btn btn-primary btn-block" type="submit">Log in</button>
+        <button onclick="updateTime()" name="action_add" class="btn btn-primary btn-block" type="submit">Log in</button>
     </form>
+
+
 
                     </div>
                 </div>
             </div>
         </div>
 </div>
+
+<script>
+function updateTime() {
+  var d = new Date();
+  var n = d.getTime();
+  document.getElementById("login_time").value = n/1000;
+}
+</script>
 
 {% endblock %}
