@@ -403,8 +403,8 @@ def initDB_acts():
     curs = conn.cursor()
     for act in acts:
         kind, name, date_begin, date_end, counts = act
-        begin=time.mktime(datetime.strptime(date_begin,'%Y/%m/%d %H:%M').timetuple())-time_change
-        end=time.mktime(datetime.strptime(date_end,'%Y/%m/%d %H:%M').timetuple())-time_change
+        begin=time.mktime(datetime.strptime(date_begin,'%Y/%m/%d %H:%M').timetuple())+time_change
+        end=time.mktime(datetime.strptime(date_end,'%Y/%m/%d %H:%M').timetuple())+time_change
         participants=0
         try:
             curs.execute('INSERT INTO acts (kind, name, begin, end, counts, participants) VALUES (?,?,?,?,?,?)', (kind, name, begin, end, counts, participants))
@@ -530,16 +530,19 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    global time_change
     if not request.is_secure and not debug:
         url = request.url.replace('http://', 'https://', 1)
         return redirect(url)
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        login_time = float(request.form['login_time'])
+        input_login_time = list(map(lambda x:int(x),request.form['login_time'].split(',')))
+        login_time = datetime(*input_login_time)
         print('Login_time: ',login_time)
-        server_time=time.time()
-        print('Time difference in seconds between Server and Client: ', server_time-login_time)
+        server_time = datetime.fromtimestamp(time.time())
+        print('server_time: ',server_time)
+        print('Time difference in seconds between Server and Client: ', (server_time-login_time).total_seconds())
         if not email or not password:
             return abort(401)
         rememberMe = False
@@ -556,7 +559,7 @@ def login():
             current_user.actual=0
             events=get_events()
             if current_user.admin:
-                time_change = server_time-login_time
+                time_change = (server_time-login_time).total_seconds()
                 print('Updated time change: ',time_change)
             return render_template('index.html', name=current_user.name, events=events, yeah=True)
         else:
@@ -570,6 +573,7 @@ def login():
 @login_required
 @act_valid_required
 def checkin():
+    global time_change
     unif=request.args.get('id','nothing')
     if unif=='nothing':
         actID=current_user.actual
@@ -592,13 +596,13 @@ def checkin():
         status[1]='42'
     elif status[0]==False:
         if status[1]=='1':
-            status[2]=datetime.fromtimestamp(float(status[2])+time_change).strftime('%Y-%m-%d %H:%M:%S')
+            status[2]=datetime.fromtimestamp(float(status[2])-time_change).strftime('%Y-%m-%d %H:%M:%S')
     elif status[0]==True:
         f=open(data_path+'/log.txt','a');
-        f.write(status[3]+', '+Act(actID).name+', '+str(datetime.fromtimestamp(float(status[2])+time_change).strftime('%Y-%m-%d %H:%M:%S'))+'\n')
+        f.write(status[3]+', '+Act(actID).name+', '+str(datetime.fromtimestamp(float(status[2])-time_change).strftime('%Y-%m-%d %H:%M:%S'))+'\n')
         f.close()
         f=open(data_path+'/logs/act{0}.txt'.format(actID),'a')
-        f.write(status[3]+', '+str(datetime.fromtimestamp(float(status[2])+time_change).strftime('%Y-%m-%d %H:%M:%S'))+'\n')
+        f.write(status[3]+', '+str(datetime.fromtimestamp(float(status[2])-time_change).strftime('%Y-%m-%d %H:%M:%S'))+'\n')
         f.close()
     return render_template('check-in.html',status=status, event=Act(actID))
 
@@ -695,6 +699,7 @@ def thank_you():
 @app.route('/all/<kind>')   #to get activitites and volunteers
 @login_required
 def all_kinds(kind):
+    global time_change
     d={'acts':'activities','colabs':'volunteers','cens':'students'}
     dclass={'acts':Act,'cens':Alum,'colabs':Colab}
     try:
@@ -725,8 +730,8 @@ def all_kinds(kind):
             if kind=='acts':
                 if i==1:
                     litems=[['Kind of activity','Name of Activity','Start time','End time','Counts','Participants']]
-                start_time=datetime.fromtimestamp(float(item['begin'])+time_change).strftime('%Y-%m-%d %H:%M:%S')
-                end_time=datetime.fromtimestamp(float(item['end'])+time_change).strftime('%Y-%m-%d %H:%M:%S')
+                start_time=datetime.fromtimestamp(float(item['begin'])-time_change).strftime('%Y-%m-%d %H:%M:%S')
+                end_time=datetime.fromtimestamp(float(item['end'])-time_change).strftime('%Y-%m-%d %H:%M:%S')
                 litems.append([item['kind'], item['name'], start_time, end_time, item['counts'], item['participants']])
             if kind=='colabs':
                 if i==1:

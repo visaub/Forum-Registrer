@@ -43,9 +43,12 @@
 
 <script>
 function updateTime() {
-  var d = new Date();
-  var n = d.getTime();
-  document.getElementById("login_time").value = n/1000;
+var d = new Date();
+
+n=d.getFullYear()+','+(parseInt(d.getMonth())+1)+','+d.getDate()+','+d.getHours()+','+d.getMinutes()+','+d.getSeconds();
+
+document.getElementById("login_time").value = n;
+
 }
 </script>
 

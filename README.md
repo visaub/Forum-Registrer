@@ -16,7 +16,7 @@ App that can be used to manage the check-in process of participants on fairs wit
 
 Initially developed by **Forum ETSEIB** and used since 2018, https://forumetseib.upc.edu, the job fair for industrial engineering students at UPC, Barcelona. 
 
-### Fetures:
+### Features:
 - Import data from .csv files
 - Volunteers and Organizers can check participants in to available activities. Volunteers have access limited to ongoing activities at the specific time, with a time window.
 - Organizers are able to see complete information about participants and volunteers on a dashboard.
